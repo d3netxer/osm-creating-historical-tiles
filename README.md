@@ -19,7 +19,7 @@ You need to get a historical OSM file from somewhere. You can download an OSM fi
 
 OSM file can com in different formats. We are downloading the OSM.pbf file type. This is a super compressed OSM file type that uses Google Protobuf for compression.
 
-For downloads over geographical areas (Geofabrik)[http://download.geofabrik.de] is a great site. You can click on various subregions. Notice that on these pages there is a 'raw directory index' link and if you click if you should see older versions of OSM files that go back in time a few months. If you find your interested geographical region and time period download the pbf file.
+For downloads over geographical areas [Geofabrik](http://download.geofabrik.de) is a great site. You can click on various subregions. Notice that on these pages there is a 'raw directory index' link and if you click if you should see older versions of OSM files that go back in time a few months. If you find your interested geographical region and time period download the pbf file.
 
 ####If you cannot find what you are looking for, then download an OSM Planet file from planet.osm.org/pbf/
 
