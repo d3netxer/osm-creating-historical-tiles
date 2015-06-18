@@ -12,26 +12,31 @@ There are various pieces of software ([osm-history-splitter](https://github.com/
 $ vagrant init omnitom/osmbox
 $ vagrant up
 ```
-
-The overall process is that you need to get a historical OSM file from somewhere. You can download an OSM file for a particular area or you can download an OSM Planet file and clip out a smaller section. If you try to do the whole world, your system will most likely crash. The next step is creating a PostGIS database and transferring your historical OSM file into it and styling it with [OpenStreetMap Carto](https://github.com/gravitystorm/openstreetmap-carto) style. Finally, you can use TileMill to create your tiles.
+###The overall process
+You need to get a historical OSM file from somewhere. You can download an OSM file for a particular area or you can download an OSM Planet file and clip out a smaller section. If you try to do the whole world, your system will most likely crash. The next step is creating a PostGIS database and transferring your historical OSM file into it and styling it with [OpenStreetMap Carto](https://github.com/gravitystorm/openstreetmap-carto) style. Finally, you can use TileMill to create your tiles.
 
 ###Getting historical OSM file
 
-Download world pbf from planet.osm.org/pbf/
+OSM file can com in different formats. We are downloading the OSM.pbf file type. This is a super compressed OSM file type that uses Google Protobuf for compression.
 
-or you can download a pbf from geofabrik.de of a smaller area.
+For downloads over geographical areas (Geofabrik)[http://download.geofabrik.de] is a great site. You can click on various subregions. Notice that on these pages there is a 'raw directory index' link and if you click if you should see older versions of OSM files that go back in time a few months. If you find your interested geographical region and time period download the pbf file.
 
-tip: 
+####If you cannot find what you are looking for, then download an OSM Planet file from planet.osm.org/pbf/
+
+These planet files have very large file sizes, here is a tip for downloading in Chrome:
+
 -In the chrome address bar type
 -chrome://flags
 -Experimental features
 -Halfway down the page "Enable Download Resumption"
 
-OSM-history-splitter to cut out smaller section pbf from world pbf:
+####Use OSM-history-splitter to cut out a smaller section pbf from world pbf:
+
+To do this you need to create a config file that specifies the bounding box of your area of interest.
 
 Ex. of osm-history-splitter softcut:
 
-vagrant@ubuntu1204-desktop:/home/osm-history-splitter$sudo ./osm-history-splitter --softcut /media/sf_cybergis_data1_hiu/osm_planet_file/planet-141105.osm.pbf /home/vagrantsplitter_config_files/nyamira.config
+vagrant@vagrant:/opt/osm-history-splitter$sudo ./osm-history-splitter --softcut /shared_folder/osm_planet_file/planet-141105.osm.pbf /home/config_files/nyamira.config
 
 ###Loading it into PostGIS and Styling
 
@@ -39,22 +44,28 @@ You need to create a database first with postgis and hstore extensions before lo
 
 (ex. based from https://github.com/openstreetmap/osm2pgsql)
 
-vagrant@ubuntu1204-desktop:~$ createdb bohol_gis
+vagrant@vagrant:~$ createdb gis2
 
-vagrant@ubuntu1204-desktop:~$ psql -d bohol_gis -c 'CREATE EXTENSION postgis; CREATE EXTENSION hstore;'
+vagrant@vagrant:~$ psql -d gis2 -c 'CREATE EXTENSION postgis; CREATE EXTENSION hstore;'
 
 
 This command loads the extracted pbf into the postgis database and applies the openstreetmap-carto style (need to create DB first):
 
-vagrant@ubuntu1204-desktop:~/osm$ osm2pgsql --create --database kathmandu_gis --user vagrant /home/osm-history-splitter/kathmandu.osh.pbf --style ~/osm/openstreetmap-carto/openstreetmap-carto.style
+vagrant@vagrant:~/osm$ osm2pgsql --create --database gis2 --user vagrant /shared_folder/osm_planet_file/planet-141105.osm.pbf --style openstreetmap-carto/openstreetmap-carto.style
+
+(if you get an error about not having enough memory, you may need to add the '--cache-stratey sparse' flag to your command
 
 ###Displaying it in TileMill and creating tiles
 
 TileMill directory:
 
+The openstreetmap-carto repo has all of the necessary files to create historical tiles in TileMill but you should download some basemap shapefiles first. Instructions on how to do this are in the repo's Install.md. Essentially go into the openstreetmap-carto directory and run get-shapefiles.sh, this will download the shapefiles. Then you need to run ogr2ogr on the Natural Earth 2.0 populated places shapefile.
+
+TileMill directory:
+
 /home/vagrant/Documents/MapBox
 
-Your TileMill projects are located inside the project directory. You should see an openstreetmap-carto folder in here. If your DB was named 'gis' then you should see your historical tiles when you open the TileMill application.
+Your TileMill projects are located inside the project directory. You need to launch the TileMill application at least once to see this folder. You should see an openstreetmap-carto folder in here. If your DB was named 'gis' then you should see your historical tiles when you open the TileMill application.
 
 Another option if you need to create multiple tile sets and you don't want to keep on re-writing the gis DB is to create a new DB for each project. Then in the TileMill directory you can copy the 'openstreetmap-cart' project folder for each new historical tile extraction. Important to note that each folder is 1.2 GB in size. Inside the folder you need to edit the project.mml file. At the bottom of the file you can replace the name with a new project name. You also need to do a find&replace to replace the dbname of gis with the dbname you created, for example: "dbname": "gis" with "dbname": "kule_gis"
 
