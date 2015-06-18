@@ -53,7 +53,7 @@ This command loads the extracted pbf into the postgis database and applies the o
 
 vagrant@vagrant:~/osm$ osm2pgsql --create --database gis2 --user vagrant /shared_folder/osm_planet_file/planet-141105.osm.pbf --style openstreetmap-carto/openstreetmap-carto.style
 
-(if you get an error about not having enough memory, you may need to add the '--cache-stratey sparse' flag to your command
+(if you get an error about not having enough memory, you may need to add the '--cache-strategy sparse' flag to your command
 
 ###Displaying it in TileMill and creating tiles
 
