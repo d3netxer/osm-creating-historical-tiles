@@ -32,7 +32,7 @@ These planet files have very large file sizes, here is a tip for downloading in 
 
 ####Use OSM-history-splitter to cut out a smaller section pbf from world pbf:
 
-To do this you need to create a config file that specifies the bounding box of your area of interest.
+To do this you need to create a config file that specifies the bounding box of your area of interest. Look inside the files folder of this repo to see an example config file for Nepal.
 
 Ex. of osm-history-splitter softcut:
 
