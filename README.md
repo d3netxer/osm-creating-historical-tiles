@@ -34,7 +34,7 @@ These planet files have very large file sizes, here is a tip for downloading in 
 
 To do this you need to create a config file that specifies the bounding box of your area of interest. Look inside the files folder of this repo to see an example config file for Nepal.
 
-*** tip: when creating config file for softcut the BBOX coordinates work like this: left lon, lower lat, right lon, upper lat
+tip: when creating config file for softcut the BBOX coordinates work like this: left lon, lower lat, right lon, upper lat
 
 Ex. of osm-history-splitter softcut:
 
