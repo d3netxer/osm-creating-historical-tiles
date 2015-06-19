@@ -40,6 +40,8 @@ Ex. of osm-history-splitter softcut:
 
 vagrant@vagrant:/opt/osm-history-splitter$sudo ./osm-history-splitter --softcut /shared_folder/osm_planet_file/planet-141105.osm.pbf /home/config_files/nyamira.config
 
+See [osm-history-splitter README](https://github.com/MaZderMind/osm-history-splitter/blob/master/README.md) for more information on osm-history-splitter
+
 ###Loading it into PostGIS and Styling
 
 You need to create a database first with postgis and hstore extensions before loading data into the database using osm2pgsql:
