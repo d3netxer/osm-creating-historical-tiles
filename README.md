@@ -12,7 +12,7 @@ There are various pieces of software ([osm-history-splitter](https://github.com/
 $ vagrant init omnitom/osmbox
 $ vagrant up
 ```
-###The overall process
+##The overall process
 You need to get a historical OSM file from somewhere. You can download an OSM file for a particular area or you can download an OSM Planet file and clip out a smaller section. If you try to do the whole world, your system will most likely crash. The next step is creating a PostGIS database and transferring your historical OSM file into it and styling it with [OpenStreetMap Carto](https://github.com/gravitystorm/openstreetmap-carto) style. Finally, you can use TileMill to create your tiles.
 
 ###Getting historical OSM file
