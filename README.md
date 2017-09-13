@@ -12,6 +12,10 @@ There are various pieces of software ([osm-history-splitter](https://github.com/
 $ vagrant init omnitom/osmbox
 $ vagrant up
 ```
+- The installed repos are located in the ~/opt directory
+
+- The openstreetmap-carto repo should be updated to reflect the latest styling changes. do into the ~/opt/openstreetmap-carto/ directory and use the command: git pull origin
+
 (username and password is 'vagrant' for virtual machine)
 
 ## The overall process
@@ -32,7 +36,7 @@ These planet files have very large file sizes, here is a tip for downloading in 
 -Experimental features
 -Halfway down the page "Enable Download Resumption"
 
-#### Use OSM-history-splitter to cut out a smaller section pbf from world pbf:
+#### (Optional Step if downloading the whole OSM Planet File) Use OSM-history-splitter to cut out a smaller section pbf from world pbf:
 
 To do this you need to create a config file that specifies the bounding box of your area of interest. Look inside the files folder of this repo to see an example config file for Nepal.
 
@@ -57,7 +61,7 @@ vagrant@vagrant:~$ psql -d gis2 -c 'CREATE EXTENSION postgis; CREATE EXTENSION h
 
 This command loads the extracted pbf into the postgis database and applies the openstreetmap-carto style (need to create DB first):
 
-vagrant@vagrant:~/osm$ osm2pgsql --create --database gis2 --user vagrant /shared_folder/osm_planet_file/planet-141105.osm.pbf --style openstreetmap-carto/openstreetmap-carto.style
+vagrant@vagrant:$ osm2pgsql --create --database gis2 --user vagrant /shared_folder/osm_planet_file/planet-141105.osm.pbf --style /opt/openstreetmap-carto/openstreetmap-carto.style
 
 (if you get an error about not having enough memory, you may need to add the '--cache-strategy sparse' flag to your command
 
