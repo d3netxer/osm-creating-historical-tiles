@@ -12,6 +12,7 @@ There are various pieces of software ([osm-history-splitter](https://github.com/
 $ vagrant init omnitom/osmbox
 $ vagrant up
 ```
+##### tips:
 - The installed repos are located in the ~/opt directory
 
 - The openstreetmap-carto repo should be updated to reflect the latest styling changes. do into the ~/opt/openstreetmap-carto/ directory and use the command: git pull origin
