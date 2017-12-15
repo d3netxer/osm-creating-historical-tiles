@@ -5,11 +5,12 @@
 - Then installed kosmtik, see this gist for instructions:
 https://gist.github.com/d3netxer/322ec6addf27b289a843c5e50caf10b8
 
-- do a git pull origin of the openstreetmap-carto directory?
+- do a git pull origin of the openstreetmap-carto directory
 
-
-
-
+- There is a new command when importing into a PostGreSQL DB
+```
+osm2pgsql -G --hstore --style openstreetmap-carto.style --tag-transform-script openstreetmap-carto.lua -d gis ~/path/to/data.osm.pbf
+```
 
 # osm-creating-historical-tiles (Before/After Sliders)
 Instructions on how to create osm historical tiles
