@@ -1,3 +1,28 @@
+# Update to instructions Sep 2018
+
+1. clone the openstreetmap-carto repo (https://github.com/gravitystorm/openstreetmap-carto)
+
+2. Use Docker Compose to import data and start up Kosmtik
+- follow the instructions for the most part from the 'DOCKER.md' readme. Except...
+- edit the 'docker-compose.yml' file:
+  - for the kosmtik service replace the "127.0.0.1:6789:6789" ports with "6789:6789". This maps the same ports between the container and the host server so that the kosmtik server is accesible to the outside world. 
+- In order to keep the container running after the docker-compose command make following edits to the 'scripts/docker-startup.sh' file:
+  - comment out this line ```kosmtik serve project.mml --host 0.0.0.0```
+  - add this line ```tail -f /dev/null```
+- now you can find the running container and enter into it in bash and run kosmtik commands
+  - find running containers with this command: ```sudo docker ps```
+  - enter running container with this command: ```sudo docker exec -u 0 -it containerID /bin/bash```
+-it should produse a running kosmtik instance with your rendered tiles with a command like this: ```kosmtik serve project.mml --host 0.0.0.0```
+3. Use the tilelive command-line (tl) (https://github.com/mojodna/tl) to save the tiles as mbtiles
+
+```
+nvm use 4
+npm install tl tilelive-http mbtiles
+node_modules/.bin/tl copy http://54.159.75.39:6789/openstreetmap-carto/tile/{z}/{x}/{y}.png mbtiles://./northern_uganda.mbtiles -b "30.151978 0.911827 35.310059 4.351889" -z 6 -Z 14
+```
+
+4. upload mbtiles to MapBox to host
+
 # Update to instructions Dec 2017
 
 - Started with osmbox
