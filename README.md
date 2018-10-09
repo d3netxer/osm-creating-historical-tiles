@@ -9,11 +9,12 @@
 - In order to keep the container running after the docker-compose command make following edits to the 'scripts/docker-startup.sh' file:
   - comment out this line ```kosmtik serve project.mml --host 0.0.0.0```
   - add this line ```tail -f /dev/null```
+- tip: if you need to re-build the container, you can use the ```docker-compose build``` command (https://github.com/docker/compose/issues/1487)
 - now you can find the running container and enter into it in bash and run kosmtik commands
   - find running containers with this command: ```sudo docker ps```
   - enter running container with this command: ```sudo docker exec -u 0 -it containerID /bin/bash```
 -it should produse a running kosmtik instance with your rendered tiles with a command like this: ```kosmtik serve project.mml --host 0.0.0.0```
-3. Use the tilelive command-line (tl) (https://github.com/mojodna/tl) to save the tiles as mbtiles
+3. Use the tilelive command-line (tl) (https://github.com/mojodna/tl, https://github.com/posm/OpenMapKitAndroid/wiki/Creating-Your-Own-MBTiles-Basemap-File, https://github.com/mojodna/tl/issues/15) to save the tiles as mbtiles
 
 ```
 nvm use 4
