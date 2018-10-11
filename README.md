@@ -1,7 +1,6 @@
 # Update to instructions Sep 2018
 
-1. clone the openstreetmap-carto repo (https://github.com/gravitystorm/openstreetmap-carto)
-
+1. clone the openstreetmap-carto repo (https://github.com/gravitystorm/openstreetmap-carto) and enter inside the directory.
 2. Use Docker Compose to import data and start up Kosmtik
 - follow the instructions for the most part from the 'DOCKER.md' readme. Except...
 - edit the 'docker-compose.yml' file:
@@ -9,6 +8,7 @@
 - In order to keep the container running after the docker-compose command make following edits to the 'scripts/docker-startup.sh' file:
   - comment out this line ```kosmtik serve project.mml --host 0.0.0.0```
   - add this line ```tail -f /dev/null```
+  - now if you running this for the first time ```sudo docker-compose up import``` before you start kosmtik with ```sudo docker-compose up kosmtik```
 - tip: if you need to re-build the container, you can use the ```docker-compose build``` command (https://github.com/docker/compose/issues/1487)
 - now you can find the running container and enter into it in bash and run kosmtik commands
   - find running containers with this command: ```sudo docker ps```
