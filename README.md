@@ -16,6 +16,16 @@
 -it should produse a running kosmtik instance with your rendered tiles with a command like this: ```kosmtik serve project.mml --host 0.0.0.0```
 - you should be able to see your tiles within the kosmtik server on a web browser, ex: http://xx.xxx.xx.xx:6789/openstreetmap-carto/#8/2.205/31.904
 3. Use the tilelive command-line (tl) (https://github.com/mojodna/tl, https://github.com/posm/OpenMapKitAndroid/wiki/Creating-Your-Own-MBTiles-Basemap-File, https://github.com/mojodna/tl/issues/15) to save the tiles as mbtiles
+- Note: another option I tried was using the kosmtik plug-ins kosmtik-tiles-export and kosmtik-mbtiles-export. kosmtik-tiles-export seemed to have worked for generating tiles, but not kosmtik-mbtiles-export for generating mbtiles, Here are example commands I used (bbox should be in minX,minY,maxX,maxY format):
+
+   - kosmtik-tiles-export command:
+```
+kosmtik export project.mml --format tiles --output export2 --tileformat 'png' --minZoom 3 --maxZoom 10 --workers 2 --tileSize 256 --metatile 2 --bounds 2.361392,30.824890,3.692966,33.441010
+```
+   - kosmtik-mbtiles-export command:
+```
+kosmtik export project.mml --format mbtiles --output export/output.mbtiles --tileformat 'png' --minZoom 3 --maxZoom 8 --workers 4 --tileSize 256 --metatile 2 --bounds 2.361392,30.824890,3.692966,33.441010
+```
 
 ```
 nvm use 4
