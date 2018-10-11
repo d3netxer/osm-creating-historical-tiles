@@ -25,11 +25,11 @@ node_modules/.bin/tl copy http://54.159.75.39:6789/openstreetmap-carto/tile/{z}/
 
 - Note: another option I tried was using the kosmtik plug-ins kosmtik-tiles-export and kosmtik-mbtiles-export. kosmtik-tiles-export seemed to have worked for generating tiles, but not kosmtik-mbtiles-export for generating mbtiles, Here are example commands I used (bbox should be in minX,minY,maxX,maxY format):
 
-  - kosmtik-tiles-export command:
+- kosmtik-tiles-export command:
 ```
 kosmtik export project.mml --format tiles --output export2 --tileformat 'png' --minZoom 3 --maxZoom 10 --workers 2 --tileSize 256 --metatile 2 --bounds 2.361392,30.824890,3.692966,33.441010
 ```
-  - kosmtik-mbtiles-export command:
+- kosmtik-mbtiles-export command:
 ```
 kosmtik export project.mml --format mbtiles --output export/output.mbtiles --tileformat 'png' --minZoom 3 --maxZoom 8 --workers 4 --tileSize 256 --metatile 2 --bounds 2.361392,30.824890,3.692966,33.441010
 ```
