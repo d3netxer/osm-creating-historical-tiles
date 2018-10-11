@@ -10,6 +10,7 @@
   - add this line ```tail -f /dev/null```
   - now if you running this for the first time ```sudo docker-compose up import``` before you start kosmtik with ```sudo docker-compose up kosmtik```
 - tip: if you need to re-build the container, you can use the ```docker-compose build``` command (https://github.com/docker/compose/issues/1487)
+- you should be able to see your tiles within the kosmtik server on a web browser, ex: http://xx.xxx.xx.xx:6789/openstreetmap-carto/#8/2.205/31.904
 - now you can find the running container and enter into it in bash and run kosmtik commands (tip: open a new terminal)
   - find running containers with this command: ```sudo docker ps```
   - enter running container with this command: ```sudo docker exec -u 0 -it containerID /bin/bash```
