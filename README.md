@@ -10,7 +10,7 @@
   - add this line ```tail -f /dev/null```
   - now if you running this for the first time ```sudo docker-compose up import``` before you start kosmtik with ```sudo docker-compose up kosmtik```
 - tip: if you need to re-build the container, you can use the ```docker-compose build``` command (https://github.com/docker/compose/issues/1487)
-- now you can find the running container and enter into it in bash and run kosmtik commands
+- now you can find the running container and enter into it in bash and run kosmtik commands (tip: open a new terminal)
   - find running containers with this command: ```sudo docker ps```
   - enter running container with this command: ```sudo docker exec -u 0 -it containerID /bin/bash```
 -it should produse a running kosmtik instance with your rendered tiles with a command like this: ```kosmtik serve project.mml --host 0.0.0.0```
